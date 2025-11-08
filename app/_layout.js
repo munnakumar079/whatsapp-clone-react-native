@@ -2,11 +2,12 @@ import { Redirect, Stack } from 'expo-router'
 import React, { useState } from 'react'
 
 function _layout() {
-    const [islogin , setlogin]=useState(false)
+  const [islogin , setislogin]=useState(false)
   return (
-   
-    islogin ? <Redirect href={'/(main)'}/> :<Redirect href={'/(auth)'} />
-
+    <>
+    <Stack screenOptions={{headerShown:false}} />
+    {islogin ? ( <Redirect href={'/(main)'} />) : (<Redirect href={'/(auth)'} />)}
+    </>
   )
 }
 
