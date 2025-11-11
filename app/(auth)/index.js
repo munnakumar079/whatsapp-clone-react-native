@@ -6,95 +6,84 @@ import { moderateScale, verticalScale } from 'react-native-size-matters'
 import { router } from 'expo-router'
 
 
-function index() {
-
+function Index() {
   const [isloding, issetloding] = useState(false)
 
-  const navigate=()=>{
-    setTimeout(()=>{
-      issetloding(true)
-      router.push('/(auth)/term_agree')
-    },3000)
-  }
+  useEffect(() => {
 
-  useEffect(()=>{
-     setTimeout(()=>{
+    const timer1 = setTimeout(() => {
       issetloding(true)
-     },2000)
-  },[])
+    }, 2000)
+
+    const timer2 = setTimeout(() => {
+      router.push('../(auth)/termagree')
+    }, 3000)
+
+    return () => {
+      clearTimeout(timer1)
+      clearTimeout(timer2)
+    }
+  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Text></Text>
-      </View>
-      <View style={styles.Body} >
-        <>
-          <Image style={styles.img} source={Imagepath.whatsapp} />
-          <Text style={styles.wtext} >whatsapp</Text>
-        </>
+      <View />
+      <View style={styles.Body}>
+        <Image style={styles.img} source={Imagepath.whatsapp} />
+        <Text style={styles.wtext}>whatsapp</Text>
       </View>
       <View style={styles.Footer}>
-        {
-          isloding ?
-            (
-              <>
-                <ActivityIndicator size={moderateScale(25)} color={'#0CCC83'}  />
-                <Text style={styles.loding} >Loding....</Text>
-              </>
-            )
-            :
-            (
-              <>
-                <Text style={styles.Ftext}>From</Text>
-                <Text style={styles.Ftext2}>FaceBook</Text>
-              </>
-            )
-        }
-
+        {isloding ? (
+          <>
+            <ActivityIndicator size={moderateScale(25)} color={'#0CCC83'} />
+            <Text style={styles.loding}>Loading....</Text>
+          </>
+        ) : (
+          <>
+            <Text style={styles.Ftext}>From</Text>
+            <Text style={styles.Ftext2}>Facebook</Text>
+          </>
+        )}
       </View>
     </SafeAreaView>
   )
 }
 
-export default index
+export default Index
 
-
-const styles = StyleSheet.create(
-  {
-    container: {
-      flex: 1,
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      paddingVertical: 40
-    },
-    Body: {
-      alignItems: 'center'
-    },
-    Footer: {
-      alignItems: 'center'
-    },
-    Ftext: {
-      fontSize: 12,
-      color: '#867373'
-    },
-    Ftext2: {
-      fontSize: 16
-    },
-    img: {
-      width: moderateScale(50),
-      height: moderateScale(50)
-    },
-    wtext: {
-      fontSize: 25,
-      fontWeight: 700,
-      gap: verticalScale(10)
-    },
-    loding:{
-      marginTop:moderateScale(10),
-      color:'#0CCC83',
-      fontSize:16,
-      fontWeight:'600'
-    }
-  }
-)
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 40,
+  },
+  Body: {
+    alignItems: 'center',
+  },
+  Footer: {
+    alignItems: 'center',
+  },
+  Ftext: {
+    fontSize: 12,
+    color: '#867373',
+  },
+  Ftext2: {
+    fontSize: 16,
+  },
+  img: {
+    width: moderateScale(60),
+    height: moderateScale(60),
+  },
+  wtext: {
+    fontSize: 25,
+    fontWeight: '700',
+    marginTop: verticalScale(10),
+  },
+  loding: {
+    marginTop: moderateScale(10),
+    color: '#0CCC83',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+})
