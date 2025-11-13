@@ -5,7 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 function Termagree() {
   return (
     <SafeAreaView>
-      <Text>Welcome to Term Agree</Text>
+      <View></View>
+      <View></View>
     </SafeAreaView>
   )
 }
